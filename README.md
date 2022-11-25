@@ -4,6 +4,10 @@
 
 Versão node: 18.9.0
 
+## MySQL
+
+[MySQL Server](https://dev.mysql.com/downloads/mysql/)
+
 ## Bibliotecas
 
 ### `npm i`
