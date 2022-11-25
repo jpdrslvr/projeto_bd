@@ -1,6 +1,9 @@
 {
   "scripts": {
-    "start": "concurrently \"npm start --prefix server\" \"npm start --prefix client\""
+    "prod": "npm run prod --prefix server",
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "both": "concurrently \"npm start --prefix server\" \"npm start --prefix client\""
   },
   "dependencies": {
     "concurrently": "^7.4.0"

@@ -12,15 +12,20 @@ const Footer = () => {
         bottom: 0,
         backgroundColor: '#3C4B64',
         width: '100%',
-        height: '3vh',
+        height: 'auto',
         color: '#fff',
         padding: 2,
+        justifyContent: 'flex-end',
+        boxSizing: 'border-box',
+        fontSize: '0.9rem',
       }}
     >
-      {/* Inserir rodapé */}
-      Projeto de Banco de Dados
-      <Divider orientation='vertical' sx={{ bgcolor: 'primary.light' }} />
-      nomes
+      <strong>Projeto de Banco de Dados - Pesquisadores</strong>
+      <Divider
+        orientation='vertical'
+        sx={{ bgcolor: '#F3F3F3', height: 'auto', borderRightWidth: 3 }}
+      />
+      João Pedro Silveira, Gustavo Dias Souza e Luiz Vitalino
     </Box>
   );
 };

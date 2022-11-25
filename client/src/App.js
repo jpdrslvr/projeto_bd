@@ -1,21 +1,37 @@
 import React from 'react';
 import './App.css';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
+import Header from './components/Header';
 import Footer from './components/Footer';
-import Search from './components/Search';
-import Filters from './components/Filters';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
+import Pesquisadores from './pages/Pesquisadores';
+import Pesquisas from './pages/Pesquisas';
+import Trabalhos from './pages/Trabalhos';
 
+// const Pesquisadores = React.lazy(() => import('./pages/Pesquisadores'));
 export default function App() {
+  const location = useLocation();
+
   return (
     <>
-      <Container component='main' maxWidth='xl' sx={{ display: 'flex', pt: 3 }}>
-        <Box component='div' sx={{ display: 'flex', width: '100%', gap: 1 }}>
-          <Box component='div' sx={{ flexGrow: 1 }}>
-            <Search />
-          </Box>
-          <Filters />
-        </Box>
+      <Container
+        component='main'
+        maxWidth='xl'
+        sx={{ display: 'flex', pt: 1, flexDirection: 'column', gap: 1 }}
+      >
+        <Header pathname={location.pathname} />
+        <Routes>
+          <Route path='/' element={<Navigate to='/pesquisadores' />} />
+          <Route path='/pesquisadores' element={<Pesquisadores />} exact />
+          <Route path='/pesquisas' element={<Pesquisas />} exact />
+          <Route path='/trabalhos' element={<Trabalhos />} exact />
+        </Routes>
       </Container>
       <Footer />
     </>

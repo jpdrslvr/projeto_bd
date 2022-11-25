@@ -1,16 +1,9 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { InputBase } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
+import { Box } from '@mui/system';
 
-const options = [
-  { label: 'Todos', value: 'Todos' },
-  { label: 'Ano', value: 'ano' },
-  { label: 'Autor', value: 'autor' },
-  { label: 'Título', value: 'titulo' },
-];
-
-const Search_ = styled('div')(({ theme }) => {
+const Search = styled('div')(({ theme }) => {
   return {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -27,6 +20,7 @@ const Search_ = styled('div')(({ theme }) => {
 const StyledInputBase = styled(TextField)(({ theme }) => ({
   color: theme.palette.primary.main,
   width: '100%',
+  textTransform: 'capitalize',
   // border: 'none',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -35,26 +29,36 @@ const StyledInputBase = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const Filters = () => {
-  return (
+const Filters = ({ filters, options, setOptions, labels = {} }) => {
+  return Object.keys(options).map((option) => (
     <Autocomplete
+      key={option}
       disablePortal
-      id='combo-box-demo'
-      options={options}
-      getOptionLabel={(option) => option.label}
-      sx={{ width: 300 }}
+      options={(option && filters[option]) || []}
+      sx={{
+        width: {
+          xs: '100%',
+          sm: 200,
+        },
+      }}
       renderInput={(params) => (
-        <Search_>
+        <Search>
           <StyledInputBase
             variant='outlined'
             {...params}
-            label='Filtros'
+            label={labels[option] || option}
             size='small'
           />
-        </Search_>
+        </Search>
       )}
+      onChange={(event, value) => {
+        setOptions((prev) => ({
+          ...prev,
+          [option]: value,
+        }));
+      }}
     />
-  );
+  ));
 };
 
 export default Filters;

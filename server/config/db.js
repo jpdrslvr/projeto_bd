@@ -1,26 +1,22 @@
-var sqlite3 = require('sqlite3').verbose();
+const mysql = require('mysql');
+const util = require('util');
 
-const DBSOURCE = 'db.sqlite';
-
-let db = new sqlite3.Database(DBSOURCE, (err) => {
-  if (err) {
-    console.error(err.message);
-    throw err;
-  } else {
-    console.log(`Conectado a BD ${DBSOURCE.yellow}`);
-    db.run(
-      `CREATE TABLE test (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            col1 CHAR(5)
-            )`,
-      (err) => {
-        if (!err) {
-          // Table just created, creating some rows
-          db.run('INSERT INTO test (col1) VALUES (?)', ['a']);
-        }
-      }
-    );
-  }
+var con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: process.env.DB_PASSWORD,
+  database: 'pesquisa',
 });
 
-module.exports = db;
+con.connect(function (err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + con.threadId);
+});
+
+const query = util.promisify(con.query).bind(con);
+
+module.exports = { con, query };
