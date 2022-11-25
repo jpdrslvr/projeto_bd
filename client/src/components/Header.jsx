@@ -16,7 +16,7 @@ const Header = ({ pathname }) => {
             variant={pathname === '/pesquisadores' ? 'contained' : 'text'}
             onClick={() => navigate('/pesquisadores')}
           >
-            Pesquisadores
+            22Pesquisadores
           </Button>
           <Button
             sx={{ color: pathname === '/pesquisas' ? '#fff' : '#3C4B64' }}

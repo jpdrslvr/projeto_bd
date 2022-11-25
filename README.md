@@ -20,6 +20,6 @@ Versão node: 18.9.0
 
 ### `npm run build --prefix client`
 
-# Executar versão prdo
+# Executar versão prod
 
 ### `npm run prod`

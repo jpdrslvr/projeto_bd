@@ -28,7 +28,6 @@ if (process.env.NODE_ENV === 'production') {
     )
   );
 } else {
-  console.log('development');
   app.get('/', (req, res) => res.send('Mude NODE_ENV para production.'));
 }
 
